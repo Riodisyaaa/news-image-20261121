@@ -1,10 +1,10 @@
 # The World in One Day — 21 November 2026
 
-[![make.fun](https://make.fun/badge.svg)](https://make.fun/bounty/news-image-20261121)
-[![Bounty](https://make.fun/bounty/news-image-20261121/badge.svg)](https://make.fun/bounty/news-image-20261121)
-[![Prize $100](https://make.fun/bounty/news-image-20261121/prize.svg)](https://make.fun/bounty/news-image-20261121)
+[![make.fun · news-image-20261121](https://make.fun/badge/news-image-20261121.svg)](https://make.fun/bounty/news-image-20261121?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
+[![rank](https://make.fun/badge/news-image-20261121/Riodisyaaa/news-image-20261121/rank.svg)](https://make.fun/bounty/news-image-20261121/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
+[![reward](https://make.fun/badge/news-image-20261121/Riodisyaaa/news-image-20261121/reward.svg)](https://make.fun/bounty/news-image-20261121?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261121)
 
-A dense newspaper front page summing up Saturday 21 November 2026 in one image: 32 stories across 6 continents, from the GTA 6 launch week to climate talks, markets, AI, science and sport.
+A dense newspaper front page summing up Saturday 21 November 2026 in one image: 52 stories across 7 regions, from the GTA 6 launch week to climate talks, markets, AI, science and sport.
 
 Entry for the make.fun bounty: https://make.fun/bounty/news-image-20261121
 
