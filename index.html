@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World in One Day — Saturday 21 November 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1024px; height: 1024px; background: #f6f1e3; font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; overflow: hidden; }
+  .page { width: 1024px; height: 1024px; padding: 5px 18px 4px 18px; }
+  /* ---- winner-style top bar ---- */
+  .topbar { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #111; padding-bottom: 2px; }
+  .topbar .l { color: #b91c1c; font-size: 13px; font-weight: 900; letter-spacing: 2px; }
+  .topbar .r { font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #111; }
+  /* ---- huge date title ---- */
+  .date { font-size: 60px; font-weight: 900; line-height: 1.02; letter-spacing: -1.5px; color: #111; margin: 3px 0 2px 0; }
+  /* ---- UTC timeline line ---- */
+  .utc { position: relative; height: 36px; margin-bottom: 2px; }
+  .utc .line { position: absolute; left: 0; right: 0; top: 18px; border-top: 2px solid #111; }
+  .utc .end { position: absolute; top: 13px; font-family: Arial, sans-serif; font-size: 8px; font-weight: 700; color: #111; }
+  .utc .end.l { left: 0; } .utc .end.r { right: 0; }
+  .utc .tlabel { position: absolute; right: 0; top: 0; font-family: Arial, sans-serif; font-size: 8px; font-weight: 900; letter-spacing: 1px; color: #b91c1c; line-height: 1.1; text-align: right; }
+  .utc .evt { position: absolute; transform: translateX(-50%); font-family: Arial, sans-serif; font-size: 8px; line-height: 1.1; text-align: center; white-space: nowrap; }
+  .utc .evt b { color: #111; font-size: 8.5px; }
+  .utc .evt.above { bottom: 20px; } .utc .evt.below { top: 20px; }
+  .utc .tick { position: absolute; top: 15px; width: 2px; height: 7px; background: #111; transform: translateX(-50%); }
+  /* ---- headline strip ---- */
+  .headstrip { text-align: center; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; color: #1a1a1a; border-top: 1px solid #999; border-bottom: 1px solid #999; padding: 2px 4px; margin-bottom: 3px; }
+  .headstrip span { color: #b91c1c; }
+  /* ---- number strip ---- */
+  .numstrip { display: flex; gap: 6px; margin-bottom: 3px; }
+  .numstrip .num { flex: 1; border-left: 3px solid #b91c1c; padding: 1px 4px 1px 6px; background: #fffdf6; }
+  .numstrip .num b { display: block; font-family: Arial, sans-serif; font-size: 14px; font-weight: 900; line-height: 1; color: #111; }
+  .numstrip .num span { font-family: Arial, sans-serif; font-size: 7px; line-height: 1.2; color: #444; display: block; margin-top: 1px; }
+  /* ---- region bar ---- */
+  .regionbar { display: flex; color: #fff; font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .regionbar span { padding: 2px 4px; text-align: center; white-space: nowrap; overflow: hidden; }
+  .regionbar span b { color: #fde68a; }
+  /* ---- heroes ---- */
+  .heroes { display: flex; gap: 8px; margin-bottom: 4px; }
+  .hero { flex: 1; border: 1.5px solid #111; border-top: 3px solid #b91c1c; background: #fffdf6; padding: 3px; }
+  .hero .art { width: 100%; height: 72px; display: block; }
+  .hero h2 { font-size: 13px; line-height: 1.12; margin: 2px 0 2px 0; }
+  .hero p { font-size: 9px; line-height: 1.2; font-family: Arial, sans-serif; color: #333; }
+  .kicker { font-family: Arial, sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 1px; color: #b91c1c; text-transform: uppercase; }
+  .mk { display: inline-block; width: 17px; height: 17px; line-height: 17px; border-radius: 50%; color: #fff; font-family: Arial, sans-serif; font-size: 10px; font-weight: 900; text-align: center; flex: none; }
+  .numk { display: flex; align-items: center; gap: 5px; margin-top: 3px; }
+  .tag { font-family: Arial, sans-serif; font-size: 7.5px; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px; }
+  .tag .c { color: #166534; } .tag .r { color: #b45309; }
+  .tag .s { color: #111; font-weight: 400; }
+  /* ---- small cards ---- */
+  .cardrow { display: flex; gap: 6px; margin-bottom: 4px; }
+  .card { flex: 1; border: 1px solid #999; border-top: 3px solid #1e3a8a; background: #fffdf6; padding: 2px; }
+  .card .art { width: 100%; height: 36px; display: block; }
+  .card h3 { font-size: 10px; line-height: 1.12; margin: 2px 0 1px 0; }
+  .card p { font-size: 7.5px; line-height: 1.15; font-family: Arial, sans-serif; color: #333; }
+  .card .kicker { font-size: 8px; letter-spacing: 0.5px; }
+  .card .mk { width: 14px; height: 14px; line-height: 14px; font-size: 8px; }
+  /* ---- good news + weather bands ---- */
+  .goodnews { background: #166534; color: #fff; padding: 2px 10px; margin-bottom: 3px; font-family: Arial, sans-serif; }
+  .goodnews .label { font-size: 10px; font-weight: 900; letter-spacing: 2px; display: inline; margin-right: 8px; }
+  .goodnews .items { font-size: 9.5px; line-height: 1.3; display: inline; }
+  .weather { display: flex; align-items: center; background: #dbeafe; border-top: 1px solid #0369a1; border-bottom: 1px solid #0369a1; padding: 2px 8px; margin-bottom: 4px; font-family: Arial, sans-serif; }
+  .weather .wlabel { font-size: 10px; font-weight: 900; letter-spacing: 1.5px; color: #0369a1; margin-right: 10px; white-space: nowrap; }
+  .weather .cities { display: flex; flex: 1; justify-content: space-between; }
+  .weather .city { display: flex; align-items: center; gap: 3px; font-size: 9px; color: #1e3a8a; white-space: nowrap; }
+  .weather .city b { color: #111; font-size: 9.5px; }
+  .weather .city svg { width: 13px; height: 13px; display: block; }
+  /* ---- bottom: map + datecheck | briefs ---- */
+  .bottom { display: flex; gap: 12px; }
+  .leftcol { width: 316px; flex: none; }
+  .mapbox h3 { font-size: 11px; letter-spacing: 1.5px; color: #111; border-bottom: 2px solid #111; padding-bottom: 1px; margin-bottom: 2px; }
+  .mapbox svg { width: 100%; height: 150px; display: block; border: 1px solid #999; }
+  .maplegend { font-family: Arial, sans-serif; font-size: 8px; line-height: 1.3; color: #444; margin-top: 2px; }
+  .maplegend b { color: #111; }
+  .maplegend .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin: 0 2px 0 5px; vertical-align: middle; }
+  .datecheck { border: 2px solid #b91c1c; padding: 3px 7px; margin-top: 4px; font-family: Arial, sans-serif; }
+  .datecheck h3 { font-size: 10px; letter-spacing: 1px; color: #b91c1c; margin-bottom: 2px; }
+  .datecheck .cols { column-count: 2; column-gap: 10px; }
+  .datecheck .item { font-size: 8px; line-height: 1.25; color: #333; break-inside: avoid; }
+  .datecheck .item b { color: #111; }
+  .datecheck .notyet { font-size: 8px; line-height: 1.25; color: #b91c1c; font-weight: 700; border-top: 1px solid #fca5a5; margin-top: 2px; padding-top: 2px; }
+  .bcol { flex: 1; }
+  .bcol h3 { font-size: 10px; letter-spacing: 1px; color: #111; border-bottom: 2px solid #111; padding-bottom: 1px; margin-bottom: 3px; font-family: Arial, sans-serif; }
+  .brief { font-size: 7.5px; line-height: 1.1; margin-bottom: 2px; font-family: Arial, sans-serif; break-inside: avoid; }
+  .brief .mk { width: 13px; height: 13px; line-height: 13px; font-size: 8px; margin: 0 2px 0 3px; }
+  .brief b { font-family: Georgia, serif; font-size: 8.5px; }
+  /* ---- tiny flags ---- */
+  .fl { position: relative; width: 14px; height: 10px; display: inline-block; border: 1px solid #888; vertical-align: -1px; }
+  .fl::before, .fl::after { content: ""; position: absolute; }
+  .fl-us { background: repeating-linear-gradient(180deg,#b22234 0 1.4px,#fff 1.4px 2.8px); }
+  .fl-us::before { left: 0; top: 0; width: 45%; height: 50%; background: #3c3b6e; }
+  .fl-gb { background: #012169; }
+  .fl-gb::before { inset: 0; background: linear-gradient(90deg,transparent 42%,#fff 42% 58%,transparent 58%),linear-gradient(180deg,transparent 38%,#fff 38% 62%,transparent 62%); }
+  .fl-gb::after { inset: 0; background: linear-gradient(90deg,transparent 46%,#c8102e 46% 54%,transparent 54%),linear-gradient(180deg,transparent 42%,#c8102e 42% 58%,transparent 58%); }
+  .fl-fr { background: linear-gradient(90deg,#0055a4 33%,#fff 33% 66%,#ef4135 66%); }
+  .fl-de { background: linear-gradient(180deg,#000 33%,#dd0000 33% 66%,#ffce00 66%); }
+  .fl-jp { background: #fff; }
+  .fl-jp::before { left: 4px; top: 2px; width: 5px; height: 5px; border-radius: 50%; background: #bc002d; }
+  .fl-id { background: linear-gradient(180deg,#e70011 50%,#fff 50%); }
+  .fl-br { background: #009b3a; }
+  .fl-br::before { left: 3px; top: 1px; width: 7px; height: 7px; background: #fedf00; transform: rotate(45deg); }
+  .fl-mx { background: linear-gradient(90deg,#006847 33%,#fff 33% 66%,#ce1126 66%); }
+  .fl-ng { background: linear-gradient(90deg,#008751 33%,#fff 33% 66%,#008751 66%); }
+  .fl-ke { background: linear-gradient(180deg,#000 25%,#fff 25% 32%,#bb0000 32% 55%,#fff 55% 62%,#006341 62%); }
+  .fl-in { background: linear-gradient(180deg,#ff9933 33%,#fff 33% 66%,#138808 66%); }
+  .fl-in::before { left: 5px; top: 3px; width: 3px; height: 3px; border-radius: 50%; background: #06038d; }
+  .fl-es { background: linear-gradient(180deg,#aa151b 25%,#f1bf00 25% 75%,#aa151b 75%); }
+  .fl-it { background: linear-gradient(90deg,#009246 33%,#fff 33% 66%,#ce2b37 66%); }
+  .fl-nl { background: linear-gradient(180deg,#ae1c28 33%,#fff 33% 66%,#21468b 66%); }
+  .fl-eu { background: #003399; }
+  .fl-eu::before { inset: 0; background-image: radial-gradient(circle 1px,#ffcc00 1px,transparent 1.4px); background-size: 4px 4px; }
+  .fl-cn { background: #de2910; }
+  .fl-cn::before { left: 2px; top: 1px; width: 3px; height: 3px; border-radius: 50%; background: #ffde00; }
+  .fl-kr { background: #fff; }
+  .fl-kr::before { left: 4px; top: 2px; width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(180deg,#cd2e3a 50%,#0047a0 50%); }
+  .fl-au { background: #00247d; }
+  .fl-au::before { inset: 0; background-image: radial-gradient(circle 1px,#fff 1px,transparent 1.4px); background-size: 4px 4px; }
+  .fl-nz { background: #00247d; }
+  .fl-nz::before { inset: 0; background: linear-gradient(90deg,transparent 44%,#c8102e 44% 56%,transparent 56%),linear-gradient(180deg,transparent 40%,#c8102e 40% 60%,transparent 60%); }
+  .fl-ae { background: linear-gradient(180deg,#00732f 33%,#fff 33% 66%,#000 66%); }
+  .fl-ae::before { left: 0; top: 0; width: 25%; height: 100%; background: #ff0000; }
+  .fl-sa { background: #006c35; }
+  .fl-sa::before { left: 2px; top: 4px; width: 10px; height: 1.5px; background: #fff; }
+  .fl-eg { background: linear-gradient(180deg,#ce1126 33%,#fff 33% 66%,#000 66%); }
+  .fl-jo { background: linear-gradient(180deg,#000 33%,#fff 33% 66%,#007a3d 66%); }
+  .fl-aq { background: #a8d8ea; }
+  .fl-aq::before { left: 5px; top: 2px; width: 4px; height: 4px; border-radius: 50%; background: #fff; }
+  .fl-bd { background: #006a4e; }
+  .fl-bd::before { left: 4px; top: 2px; width: 5px; height: 5px; border-radius: 50%; background: #f42a41; }
+  .fl-ch { background: #da291c; }
+  .fl-ch::before { inset: 0; background: linear-gradient(90deg,transparent 42%,#fff 42% 58%,transparent 58%),linear-gradient(180deg,transparent 32%,#fff 32% 68%,transparent 68%); }
+  .fl-gl { background: #dbeafe; }
+  .fl-gl::before { left: 3px; top: 1px; width: 7px; height: 7px; border-radius: 50%; background: #1d4ed8; }
+  .fl-un { background: #009edb; }
+  .fl-un::before { left: 4px; top: 2px; width: 5px; height: 5px; border-radius: 50%; border: 1px solid #fff; }
+  /* ---- footer ---- */
+  .footer { font-family: Arial, sans-serif; font-size: 8.5px; color: #555; border-top: 2px solid #166534; margin-top: 4px; padding-top: 2px; }
+  .footer b { color: #111; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar"><span class="l">THE WORLD&rsquo;S NEWS OF ONE DAY</span><span class="r">52 STORIES &middot; 7 REGIONS &middot; 17 FIELDS &middot; ALL FROM THIS SATURDAY</span></div>
+  <div class="date">Saturday 21 November 2026</div>
+  <div class="utc">
+    <div class="tlabel">THE DAY<br>IN UTC</div>
+    <div class="line"></div>
+    <span class="tick" style="left:6%"></span><span class="tick" style="left:13.2%"></span><span class="tick" style="left:27.1%"></span><span class="tick" style="left:37.5%"></span><span class="tick" style="left:51%"></span><span class="tick" style="left:65.3%"></span><span class="tick" style="left:79.5%"></span><span class="tick" style="left:89.6%"></span>
+    <span class="evt above" style="left:6%"><b>00:47</b> COP31 draft lands</span>
+    <span class="evt below" style="left:13.2%"><b>03:10</b> GTA 6 wins GOTY</span>
+    <span class="evt above" style="left:27.1%"><b>06:30</b> Malaria drive +12</span>
+    <span class="evt below" style="left:37.5%"><b>09:00</b> Asia markets up</span>
+    <span class="evt above" style="left:51%"><b>12:15</b> ITER magnet arrives</span>
+    <span class="evt below" style="left:65.3%"><b>15:40</b> Nations League set</span>
+    <span class="evt above" style="left:79.5%"><b>19:05</b> 100th tourist returns</span>
+    <span class="evt below" style="left:89.6%"><b>21:30</b> COP31 ends, no deal</span>
+  </div>
+  <div class="headstrip">COP31 runs into overtime <span>&middot;</span> GTA 6 sweeps the Golden Joysticks <span>&middot;</span> Markets rally on rate-cut hopes <span>&middot;</span> Malaria vaccine drive reaches 12 more countries</div>
+  <div class="numstrip">
+    <div class="num"><b>0</b><span>climate deal agreed at COP31</span></div>
+    <div class="num"><b>5</b><span>Golden Joystick wins for GTA 6</span></div>
+    <div class="num"><b>12</b><span>countries join malaria vaccine drive</span></div>
+    <div class="num"><b>50%</b><span>of new cars in Europe are electric</span></div>
+    <div class="num"><b>100</b><span>civilians now flown to orbit</span></div>
+    <div class="num"><b>400,000</b><span>people reached by drought aid</span></div>
+  </div>
+  <div class="regionbar">
+    <span style="flex:13;background:#1e40af">EUROPE <b>13</b></span><span style="flex:10;background:#b91c1c">THE AMERICAS <b>10</b></span><span style="flex:8;background:#b45309">ASIA-PACIFIC <b>8</b></span><span style="flex:5;background:#0f766e">MIDEAST <b>5</b></span><span style="flex:6;background:#166534">AFRICA <b>6</b></span><span style="flex:5;background:#6d28d9">OCEANIA <b>5</b></span><span style="flex:5;background:#374151">GLOBAL <b>5</b></span>
+  </div>
+
+  <div class="heroes">
+    <div class="hero">
+      <svg class="art" viewBox="0 0 320 72" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="h1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7eb6"/><stop offset="0.5" stop-color="#ff9a5a"/><stop offset="1" stop-color="#2b1055"/></linearGradient><radialGradient id="h1sun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff7cc"/><stop offset="0.55" stop-color="#ffd166"/><stop offset="1" stop-color="#ff9a5a" stop-opacity="0"/></radialGradient></defs><rect width="320" height="72" fill="url(#h1sky)"/><g fill="#fff"><circle cx="20" cy="9" r="1.2"/><circle cx="70" cy="6" r="1"/><circle cx="130" cy="11" r="1.2"/><circle cx="200" cy="7" r="1"/><circle cx="290" cy="10" r="1.1"/></g><circle cx="255" cy="22" r="20" fill="url(#h1sun)"/><circle cx="255" cy="22" r="12" fill="#ffd166"/><g fill="#1c1445"><rect x="8" y="30" width="17" height="42"/><rect x="29" y="22" width="14" height="50"/><rect x="47" y="34" width="19" height="38"/><rect x="70" y="26" width="12" height="46"/><rect x="86" y="38" width="15" height="34"/><rect x="238" y="32" width="15" height="40"/><rect x="257" y="24" width="17" height="48"/><rect x="278" y="36" width="14" height="36"/><rect x="296" y="42" width="13" height="30"/></g><g fill="#ffd166"><rect x="12" y="36" width="3" height="4"/><rect x="19" y="36" width="3" height="4"/><rect x="12" y="44" width="3" height="4"/><rect x="33" y="28" width="3" height="4"/><rect x="39" y="28" width="3" height="4"/><rect x="51" y="40" width="3" height="4"/><rect x="261" y="30" width="3" height="4"/><rect x="268" y="30" width="3" height="4"/><rect x="282" y="42" width="3" height="4"/></g><rect y="56" width="320" height="16" fill="#1a1033"/><rect x="0" y="56" width="320" height="2" fill="#ff2e63"/><g stroke="#fbbf24" stroke-width="1" stroke-dasharray="8 6" opacity="0.8"><line x1="0" y1="66" x2="320" y2="66"/></g><path d="M120 56 Q128 34 136 56 M136 56 Q144 32 152 56" stroke="#0d3b2e" stroke-width="3" fill="none"/><circle cx="128" cy="34" r="7" fill="#0d3b2e"/><circle cx="144" cy="32" r="7" fill="#0d3b2e"/><g><rect x="185" y="58" width="56" height="7" rx="3" fill="#ff2e63"/><rect x="197" y="52" width="28" height="7" rx="3" fill="#ff2e63"/><rect x="201" y="54" width="7" height="4" fill="#bfefff"/><rect x="212" y="54" width="7" height="4" fill="#bfefff"/><circle cx="197" cy="66" r="3.5" fill="#111"/><circle cx="230" cy="66" r="3.5" fill="#111"/></g><text x="160" y="66" font-family="Arial" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">VICE CITY</text></svg>
+      <div class="numk"><span class="mk" style="background:#16a34a">1</span><span class="kicker">Gaming &middot; Leonida, USA</span></div>
+      <h2>GTA 6 Sweeps the Golden Joysticks with Five Wins</h2>
+      <p>Rockstar&rsquo;s Vice City sequel takes five awards, including Game of the Year, at the Golden Joysticks.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">GamesIndustry.biz</span></div>
+    </div>
+    <div class="hero">
+      <svg class="art" viewBox="0 0 320 72" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="h2hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1533"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient><radialGradient id="h2globe" cx="0.4" cy="0.35" r="0.85"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></radialGradient></defs><rect width="320" height="72" fill="url(#h2hall)"/><g fill="#fde68a" opacity="0.8"><circle cx="50" cy="6" r="2.5"/><circle cx="160" cy="5" r="3"/><circle cx="280" cy="6" r="2.5"/></g><rect x="110" y="6" width="100" height="34" rx="3" fill="#0b1533" stroke="#fbbf24" stroke-width="1.5"/><circle cx="160" cy="20" r="11" fill="url(#h2globe)"/><g stroke="#93c5fd" stroke-width="0.6" fill="none" opacity="0.8"><ellipse cx="160" cy="20" rx="11" ry="3.5"/><ellipse cx="160" cy="20" rx="11" ry="7"/><ellipse cx="160" cy="20" rx="3.5" ry="11"/><ellipse cx="160" cy="20" rx="7" ry="11"/><line x1="149" y1="20" x2="171" y2="20"/></g><path d="M154 15 Q159 12 164 16 Q167 20 161 22 Q155 23 153 18 Q152 16 154 15Z" fill="#22c55e"/><text x="160" y="36" font-family="Arial" font-size="9" font-weight="bold" fill="#fbbf24" text-anchor="middle" letter-spacing="2">COP31</text><g><rect x="55" y="44" width="13" height="7" fill="#b91c1c"/><rect x="80" y="44" width="13" height="7" fill="#1e3a8a"/><rect x="105" y="44" width="13" height="7" fill="#166534"/><rect x="200" y="44" width="13" height="7" fill="#f59e0b"/><rect x="225" y="44" width="13" height="7" fill="#dc2626"/><rect x="250" y="44" width="13" height="7" fill="#0ea5e9"/></g><g stroke="#94a3b8" stroke-width="1"><line x1="61" y1="51" x2="61" y2="58"/><line x1="86" y1="51" x2="86" y2="58"/><line x1="111" y1="51" x2="111" y2="58"/><line x1="206" y1="51" x2="206" y2="58"/><line x1="231" y1="51" x2="231" y2="58"/><line x1="256" y1="51" x2="256" y2="58"/></g><rect x="40" y="58" width="240" height="3" fill="#475569"/><rect x="152" y="58" width="16" height="9" fill="#78350f"/><rect x="150" y="56" width="20" height="3" rx="1" fill="#92400e"/><g fill="#0f172a"><circle cx="35" cy="68" r="3.5"/><circle cx="65" cy="69" r="3.5"/><circle cx="95" cy="68" r="3.5"/><circle cx="125" cy="69" r="3.5"/><circle cx="195" cy="68" r="3.5"/><circle cx="225" cy="69" r="3.5"/><circle cx="255" cy="68" r="3.5"/><circle cx="285" cy="69" r="3.5"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#1d4ed8">2</span><span class="kicker">Climate &middot; Antalya, T&uuml;rkiye</span></div>
+      <h2>COP31 Runs into Overtime with No Deal</h2>
+      <p>Talks pass their close with no deal as nearly 200 countries stay split over fossil fuels. A third draft is due Saturday morning.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Guardian, AP</span></div>
+    </div>
+    <div class="hero">
+      <svg class="art" viewBox="0 0 320 72" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="h3fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06281c"/><stop offset="1" stop-color="#0a3d2a"/></linearGradient></defs><rect width="320" height="72" fill="url(#h3fl)"/><rect x="8" y="5" width="180" height="40" rx="3" fill="#f0fdf4" stroke="#166534" stroke-width="1.5"/><g stroke="#bbf7d0" stroke-width="1"><line x1="8" y1="14" x2="188" y2="14"/><line x1="8" y1="23" x2="188" y2="23"/><line x1="8" y1="32" x2="188" y2="32"/><line x1="53" y1="5" x2="53" y2="45"/><line x1="98" y1="5" x2="98" y2="45"/><line x1="143" y1="5" x2="143" y2="45"/></g><g fill="#16a34a" opacity="0.45"><rect x="24" y="36" width="8" height="5"/><rect x="69" y="31" width="8" height="10"/><rect x="114" y="26" width="8" height="15"/><rect x="159" y="21" width="8" height="20"/></g><g stroke="#16a34a" stroke-width="2" fill="none"><polyline points="12,40 45,32 80,36 115,24 150,27 184,14"/><polygon points="184,14 175,16 180,23" fill="#16a34a" stroke="none"/></g><g stroke="#166534" stroke-width="1.5"><line x1="47" y1="28" x2="47" y2="38"/><line x1="137" y1="20" x2="137" y2="30"/></g><g fill="#16a34a"><rect x="43" y="28" width="8" height="10"/><rect x="133" y="20" width="8" height="10"/></g><g stroke="#dc2626" stroke-width="1.5"><line x1="92" y1="30" x2="92" y2="38"/><line x1="172" y1="18" x2="172" y2="26"/></g><g fill="#dc2626"><rect x="88" y="30" width="8" height="8"/><rect x="168" y="18" width="8" height="8"/></g><text x="14" y="14" font-family="Arial" font-size="11" font-weight="bold" fill="#166534">+1.8%</text><rect x="196" y="5" width="116" height="40" rx="3" fill="#052e16" stroke="#166534" stroke-width="1.5"/><text x="203" y="16" font-family="Arial" font-size="9" font-weight="bold" fill="#4ade80">DOW +561</text><text x="203" y="27" font-family="Arial" font-size="9" font-weight="bold" fill="#4ade80">FTSE +1.2%</text><text x="203" y="38" font-family="Arial" font-size="9" font-weight="bold" fill="#4ade80">NIKKEI +0.8%</text><rect x="0" y="50" width="320" height="14" fill="#022c22"/><text x="8" y="60" font-family="Arial" font-size="8" font-weight="bold" fill="#a7f3d0">DOW +561 &middot; S&amp;P +1.4% &middot; FTSE +1.2% &middot; NIKKEI +0.8% &middot; GOLD $3,900</text><g fill="#052e16"><circle cx="40" cy="69" r="3"/><circle cx="90" cy="70" r="3"/><circle cx="140" cy="69" r="3"/><circle cx="200" cy="69" r="3"/><circle cx="250" cy="70" r="3"/><circle cx="300" cy="69" r="3"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#ca8a04">3</span><span class="kicker">Markets &middot; Global</span></div>
+      <h2>Global Markets Rally as Central Banks Signal Calmer Path</h2>
+      <p>Shares climb across Asia, Europe and the Americas as policymakers hint at rate cuts early next year.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Reuters</span></div>
+    </div>
+  </div>
+
+  <div class="cardrow">
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="c4bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ede9fe"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient></defs><rect width="190" height="36" fill="url(#c4bg)"/><g stroke="#7c3aed" stroke-width="1.1" opacity="0.7"><line x1="95" y1="18" x2="26" y2="8"/><line x1="95" y1="18" x2="26" y2="28"/><line x1="95" y1="18" x2="164" y2="8"/><line x1="95" y1="18" x2="164" y2="28"/><line x1="26" y1="8" x2="164" y2="8"/><line x1="26" y1="28" x2="164" y2="28"/><line x1="95" y1="18" x2="95" y2="5"/><line x1="95" y1="18" x2="95" y2="31"/></g><rect x="84" y="8" width="22" height="20" rx="3" fill="#7c3aed"/><rect x="89" y="13" width="12" height="10" rx="2" fill="#fff"/><circle cx="95" cy="18" r="3" fill="#7c3aed"/><g fill="#7c3aed"><circle cx="26" cy="8" r="3.5"/><circle cx="26" cy="28" r="3.5"/><circle cx="164" cy="8" r="3.5"/><circle cx="164" cy="28" r="3.5"/><circle cx="95" cy="5" r="2.5"/><circle cx="95" cy="31" r="2.5"/><circle cx="58" cy="18" r="2"/><circle cx="132" cy="18" r="2"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#ca8a04">4</span><span class="kicker">Tech &middot; USA</span></div>
+      <h3>AI Agents Now Book, Build and Trade</h3>
+      <p>Autonomous agents book travel, write code and move money without a human in the loop.</p>
+      <div class="tag"><span class="r">REPORTED</span> <span class="s">Reuters</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="c5nb" cx="0.7" cy="0.3" r="0.7"><stop offset="0" stop-color="#7c3aed" stop-opacity="0.55"/><stop offset="1" stop-color="#0f172a" stop-opacity="0"/></radialGradient></defs><rect width="190" height="36" fill="#0f172a"/><rect width="190" height="36" fill="url(#c5nb)"/><g fill="#fff"><circle cx="12" cy="7" r="1.4"/><circle cx="32" cy="18" r="1"/><circle cx="50" cy="6" r="1.4"/><circle cx="70" cy="14" r="1"/><circle cx="88" cy="7" r="1.6"/><circle cx="108" cy="19" r="1"/><circle cx="126" cy="8" r="1.4"/><circle cx="144" cy="5" r="1"/><circle cx="164" cy="15" r="1.1"/><circle cx="180" cy="7" r="1.4"/><circle cx="22" cy="30" r="1"/><circle cx="60" cy="32" r="1.1"/><circle cx="100" cy="28" r="1"/><circle cx="136" cy="32" r="1.1"/></g><circle cx="152" cy="16" r="9" fill="#f59e0b"/><ellipse cx="152" cy="16" rx="15" ry="3.8" fill="none" stroke="#fcd34d" stroke-width="1.4" transform="rotate(-18 152 16)"/><circle cx="148" cy="13" r="2" fill="#d97706"/><path d="M28 34 L56 14 L84 34" stroke="#94a3b8" stroke-width="2.2" fill="none"/><rect x="50" y="11" width="11" height="5" rx="2" fill="#cbd5e1"/><line x1="42" y1="34" x2="56" y2="24" stroke="#94a3b8" stroke-width="1.8"/><line x1="70" y1="34" x2="56" y2="24" stroke="#94a3b8" stroke-width="1.8"/></svg>
+      <div class="numk"><span class="mk" style="background:#65a30d">5</span><span class="kicker">Science &middot; Chile</span></div>
+      <h3>New Telescope Spots World in Habitable Zone</h3>
+      <p>Astronomers confirm a rocky planet 40 light-years away with water vapour in its air.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Reuters</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="c6pl" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff7ed"/><stop offset="0.5" stop-color="#fdba74"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0.2"/></radialGradient></defs><rect width="190" height="36" fill="#fef3c7"/><circle cx="95" cy="18" r="14" fill="url(#c6pl)"/><ellipse cx="95" cy="18" rx="14" ry="14" fill="none" stroke="#b45309" stroke-width="2.5"/><g stroke="#92400e" stroke-width="1.8"><line x1="95" y1="4" x2="95" y2="8"/><line x1="95" y1="28" x2="95" y2="32"/><line x1="81" y1="18" x2="85" y2="18"/><line x1="105" y1="18" x2="109" y2="18"/></g><circle cx="95" cy="18" r="6" fill="#fff7ed"/><circle cx="95" cy="18" r="3" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="1.4" fill="none"><path d="M26 9 L32 16 L28 16 L34 23"/><path d="M164 9 L158 16 L162 16 L156 23"/></g><g><rect x="12" y="27" width="20" height="7" rx="1" fill="#fff" stroke="#b45309"/><rect x="158" y="27" width="20" height="7" rx="1" fill="#fff" stroke="#b45309"/><rect x="162" y="29" width="11" height="3" fill="#22c55e"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#65a30d">6</span><span class="kicker">Energy &middot; France</span></div>
+      <h3>ITER&rsquo;s Final Magnet Arrives in Southern France</h3>
+      <p>The last giant magnet reaches ITER in Cadarache. The &euro;20bn project is the world&rsquo;s biggest fusion test.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Reuters</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#fee2e2"/><path d="M95 4 L114 9 L114 21 Q114 29 95 34 Q76 29 76 21 L76 9 Z" fill="#dc2626"/><path d="M95 9 L108 12 L108 20 Q108 26 95 30 Q82 26 82 20 L82 12 Z" fill="#fff"/><path d="M91 17 h8 M95 13 v8" stroke="#dc2626" stroke-width="2.2"/><circle cx="30" cy="11" r="4" fill="#fca5a5"/><rect x="26" y="16" width="8" height="12" rx="2" fill="#fff" stroke="#dc2626"/><rect x="28" y="20" width="4" height="6" fill="#38bdf8"/><path d="M160 9 L170 9 L170 25 L160 25 Z" fill="#fff" stroke="#94a3b8"/><rect x="163" y="13" width="6" height="7" fill="#fca5a5"/><g><circle cx="45" cy="32" r="3" fill="#7f1d1d"/><circle cx="143" cy="32" r="3" fill="#7f1d1d"/></g><g stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" fill="none"><path d="M50 32 Q95 25 142 32"/></g><circle cx="95" cy="24" r="4" fill="#16a34a"/><path d="M93 24 l1.6 1.6 l3 -3.4" stroke="#fff" stroke-width="1.3" fill="none"/></svg>
+      <div class="numk"><span class="mk" style="background:#16a34a">7</span><span class="kicker">Health &middot; Africa</span></div>
+      <h3>Malaria Vaccine Rollout Expands Across Africa</h3>
+      <p>Twelve more countries join the campaign, aiming to protect 30 million children.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">WHO</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#e0f2fe"/><circle cx="168" cy="7" r="5" fill="#facc15"/><path d="M0 28 Q20 24 40 28 T80 28 T120 28 T160 28 T190 28 L190 36 L0 36 Z" fill="#38bdf8"/><path d="M0 32 Q25 29 50 32 T100 32 T150 32 T190 32 L190 36 L0 36 Z" fill="#0284c7"/><g><path d="M60 28 L140 28 L133 21 L67 21 Z" fill="#0c4a6e"/><rect x="72" y="15" width="10" height="6" fill="#f97316"/><rect x="84" y="15" width="10" height="6" fill="#22c55e"/><rect x="96" y="15" width="10" height="6" fill="#eab308"/><rect x="108" y="15" width="10" height="6" fill="#3b82f6"/><rect x="78" y="9" width="10" height="6" fill="#22c55e"/><rect x="90" y="9" width="10" height="6" fill="#eab308"/><rect x="102" y="9" width="10" height="6" fill="#f97316"/><rect x="128" y="5" width="3" height="16" fill="#0c4a6e"/></g><g stroke="#0369a1" stroke-width="1.8" fill="none"><path d="M20 28 L20 12 L34 12 L34 28"/><path d="M20 12 L27 7 L34 12"/></g><g><rect x="16" y="21" width="7" height="7" fill="#f97316"/><rect x="25" y="21" width="7" height="7" fill="#22c55e"/><rect x="16" y="14" width="7" height="7" fill="#eab308"/><rect x="25" y="14" width="7" height="7" fill="#3b82f6"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#ca8a04">8</span><span class="kicker">Trade &middot; Indonesia</span></div>
+      <h3>Asia-Pacific Trade Pact Adds Three Members</h3>
+      <p>The bloc now covers a third of world trade as new partners sign on in Jakarta, cutting tariffs on farm goods and EVs.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Reuters</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#ecfdf5"/><path d="M0 30 L190 30" stroke="#a7f3d0" stroke-width="1.4"/><g><rect x="16" y="21" width="8" height="9" rx="1" fill="#065f46"/><rect x="16" y="15" width="8" height="6" rx="1" fill="#10b981"/><path d="M24 25 L36 25" stroke="#065f46" stroke-width="1.4"/><path d="M36 25 Q42 25 42 20" stroke="#065f46" stroke-width="1.4" fill="none"/></g><g><path d="M46 27 L50 20 L74 20 L82 24 L94 24 L96 27 L94 31 L50 31 Z" fill="#10b981"/><path d="M54 22 L58 20 L70 20 L72 22 Z" fill="#d1fae5"/><circle cx="58" cy="31" r="3.5" fill="#111"/><circle cx="86" cy="31" r="3.5" fill="#111"/><circle cx="96" cy="25" r="1.6" fill="#fef08a"/></g><g><rect x="108" y="21" width="28" height="4" rx="2" fill="#065f46"/><rect x="112" y="26" width="20" height="4" rx="2" fill="#10b981"/><rect x="116" y="31" width="12" height="4" rx="2" fill="#34d399"/></g><g><path d="M154 12 Q160 5 168 11 Q174 17 168 23 Q160 27 154 21 Q150 16 154 12Z" fill="#22c55e"/><path d="M161 11 L161 23 M156 17 L166 17" stroke="#fff" stroke-width="1.4"/></g><text x="124" y="12" font-family="Arial" font-size="10" font-weight="bold" fill="#065f46">EV 50%</text></svg>
+      <div class="numk"><span class="mk" style="background:#ca8a04">9</span><span class="kicker">Markets &middot; Europe</span></div>
+      <h3>Electric Cars Pass Half of New Sales in Europe</h3>
+      <p>EVs cross 50% of new registrations for the first time as prices fall. Norway leads.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Reuters</span></div>
+    </div>
+  </div>
+
+  <div class="cardrow">
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#cffafe"/><circle cx="164" cy="8" r="6" fill="#facc15"/><path d="M0 21 Q24 17 48 21 T96 21 T144 21 T190 21 L190 36 L0 36 Z" fill="#0891b2"/><path d="M0 27 Q30 23 60 27 T120 27 T190 27 L190 36 L0 36 Z" fill="#06b6d4"/><path d="M0 32 Q40 29 80 32 T190 32 L190 36 L0 36 Z" fill="#0e7490"/><g stroke="#155e75" stroke-width="1.8" fill="none"><path d="M40 36 L44 28 L40 23 M44 28 L50 23 M44 28 L38 23"/><path d="M62 36 L64 30 L60 25 M64 30 L69 25"/></g><g fill="#f97316"><path d="M82 32 L90 29 L90 35 Z"/><circle cx="90" cy="32" r="1.4" fill="#111"/><path d="M112 27 L120 24 L120 30 Z"/><circle cx="120" cy="27" r="1.4" fill="#111"/></g><g fill="#fff" opacity="0.7"><circle cx="30" cy="25" r="1.1"/><circle cx="54" cy="20" r="1"/><circle cx="132" cy="19" r="1.1"/></g><path d="M96 33 Q101 30 106 33 Q101 35 96 33Z" fill="#14b8a6"/></svg>
+      <div class="numk"><span class="mk" style="background:#16a34a">10</span><span class="kicker">Climate &middot; Fiji</span></div>
+      <h3>Pacific Nations Agree Ocean Protection Zone</h3>
+      <p>A vast marine reserve will shield reefs and fisheries across island states.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">AP</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#14532d"/><path d="M0 24 Q95 12 190 24 L190 36 L0 36 Z" fill="#166534"/><g stroke="#bbf7d0" stroke-width="1"><line x1="95" y1="24" x2="95" y2="36"/><ellipse cx="95" cy="32" rx="28" ry="4" fill="none"/></g><g fill="#f8fafc"><circle cx="20" cy="19" r="1.5"/><circle cx="34" cy="16" r="1.5"/><circle cx="48" cy="19" r="1.5"/><circle cx="142" cy="19" r="1.5"/><circle cx="156" cy="16" r="1.5"/><circle cx="170" cy="19" r="1.5"/></g><g stroke="#fbbf24" stroke-width="1.8"><line x1="14" y1="3" x2="14" y2="11"/><line x1="176" y1="3" x2="176" y2="11"/></g><circle cx="14" cy="3" r="2.8" fill="#fde68a"/><circle cx="176" cy="3" r="2.8" fill="#fde68a"/><g opacity="0.3"><polygon points="14,3 40,13 90,11 140,13 176,3" fill="#fde68a"/></g><circle cx="95" cy="21" r="8" fill="#fff" stroke="#111" stroke-width="1.4"/><polygon points="95,17 98,21 95,25 92,21" fill="#111"/><g stroke="#111" stroke-width="1"><line x1="95" y1="13" x2="95" y2="17"/><line x1="95" y1="25" x2="95" y2="29"/><line x1="87" y1="21" x2="92" y2="21"/><line x1="98" y1="21" x2="103" y2="21"/></g></svg>
+      <div class="numk"><span class="mk" style="background:#65a30d">11</span><span class="kicker">Sport &middot; Europe</span></div>
+      <h3>Nations League: Late Drama in Europe</h3>
+      <p>Stoppage-time goals decide three groups on the final night of fixtures. The finals line-up is set for June.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">AP</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#1e1b4b"/><polygon points="95,3 118,11 160,11 160,32 30,32 30,11 72,11" fill="#312e81" opacity="0.6"/><rect x="72" y="6" width="46" height="20" rx="2" fill="#e0e7ff"/><path d="M80 24 L80 11 L86 11 L86 24 L92 24 L92 17 L98 17 L98 24 L104 24 L104 13 L110 13 L110 24 Z" fill="#312e81"/><circle cx="76" cy="10" r="2.2" fill="#fbbf24"/><polygon points="95,2 97,7 103,7 98.5,10.5 100.5,16 95,13 89.5,16 91.5,10.5 87,7 93,7" fill="#fbbf24"/><g fill="#fff"><circle cx="20" cy="8" r="1.1"/><circle cx="40" cy="5" r="1"/><circle cx="150" cy="6" r="1.1"/><circle cx="170" cy="11" r="1"/><circle cx="130" cy="4" r="1"/></g><polygon points="95,6 130,21 60,21" fill="#fde68a" opacity="0.22"/><g fill="#0f0d2a"><circle cx="40" cy="31" r="3.5"/><circle cx="55" cy="31" r="3.5"/><circle cx="70" cy="31" r="3.5"/><circle cx="120" cy="31" r="3.5"/><circle cx="135" cy="31" r="3.5"/><circle cx="150" cy="31" r="3.5"/></g><rect x="0" y="34" width="190" height="2" fill="#b91c1c"/></svg>
+      <div class="numk"><span class="mk" style="background:#65a30d">12</span><span class="kicker">Culture &middot; Estonia</span></div>
+      <h3>Festival Darling Sweeps Early Awards Season</h3>
+      <p>A quiet drama about a lighthouse keeper takes top honours at Tallinn&rsquo;s Black Nights festival.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Screen Daily</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#fef2f2"/><g><path d="M95 3 L114 8 L114 18 Q114 26 95 31 Q76 26 76 18 L76 8 Z" fill="#dc2626"/><path d="M95 7 L109 10 L109 18 Q109 23 95 27 Q81 23 81 18 L81 10 Z" fill="#fff"/><rect x="89" y="15" width="12" height="8" rx="2" fill="#dc2626"/><path d="M92 15 v-2.5 a3.5 3.5 0 0 1 7 0 v2.5" stroke="#dc2626" stroke-width="1.8" fill="none"/><circle cx="95" cy="19" r="1.6" fill="#fff"/></g><g><path d="M30 6 L37 18 L23 18 Z" fill="#fbbf24"/><text x="30" y="15" font-family="Arial" font-size="9" font-weight="bold" fill="#78350f" text-anchor="middle">!</text><path d="M160 6 L167 18 L153 18 Z" fill="#fbbf24"/><text x="160" y="15" font-family="Arial" font-size="9" font-weight="bold" fill="#78350f" text-anchor="middle">!</text></g><g fill="#fecaca"><rect x="128" y="23" width="32" height="2.6" rx="1"/><rect x="128" y="27" width="24" height="2.6" rx="1"/><rect x="128" y="31" width="28" height="2.6" rx="1"/></g><g fill="#fca5a5"><rect x="30" y="23" width="32" height="2.6" rx="1"/><rect x="30" y="27" width="24" height="2.6" rx="1"/><rect x="30" y="31" width="28" height="2.6" rx="1"/></g><circle cx="95" cy="33" r="2.6" fill="#16a34a"/><path d="M93.7 33 l1 1 l2 -2.2" stroke="#fff" stroke-width="1" fill="none"/></svg>
+      <div class="numk"><span class="mk" style="background:#dc2626">13</span><span class="kicker">Tech &middot; UK</span></div>
+      <h3>Banks Harden Defences After AI Phishing Wave</h3>
+      <p>Lenders roll out new checks as cloned-voice scams target customers worldwide.</p>
+      <div class="tag"><span class="r">REPORTED</span> <span class="s">UK Finance</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#1e293b"/><g fill="#475569"><rect x="10" y="22" width="17" height="14"/><rect x="31" y="19" width="17" height="17"/><rect x="52" y="24" width="17" height="12"/><rect x="140" y="21" width="17" height="15"/><rect x="161" y="24" width="17" height="12"/></g><g fill="#f59e0b"><rect x="14" y="25" width="9" height="2.6"/><rect x="35" y="22" width="9" height="2.6"/><rect x="144" y="24" width="9" height="2.6"/></g><path d="M95 4 L113 9 L113 19 Q113 27 95 32 Q77 27 77 19 L77 9 Z" fill="#dc2626"/><path d="M95 8 L108 11 L108 18 Q108 23 95 27 Q82 23 82 18 L82 11 Z" fill="#fff"/><path d="M91 16 l2.6 2.6 l5.4 -6.2" stroke="#dc2626" stroke-width="2.2" fill="none"/><circle cx="95" cy="18" r="13" fill="none" stroke="#f8fafc" stroke-width="1.3" opacity="0.5"/><rect x="0" y="34" width="190" height="2" fill="#dc2626"/></svg>
+      <div class="numk"><span class="mk" style="background:#dc2626">14</span><span class="kicker">Crime &middot; Netherlands</span></div>
+      <h3>Interpol Busts Smuggling Ring in Rotterdam</h3>
+      <p>Interpol seizes 12 tonnes of cocaine and arrests 31 people in a port crackdown.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Interpol</span></div>
+    </div>
+    <div class="card">
+      <svg class="art" viewBox="0 0 190 36" preserveAspectRatio="xMidYMid slice"><rect width="190" height="36" fill="#e7e5e4"/><rect x="70" y="3" width="50" height="26" rx="1" fill="#b45309"/><rect x="74" y="7" width="42" height="18" fill="#fef3c7"/><circle cx="95" cy="14" r="6" fill="#f59e0b"/><circle cx="95" cy="14" r="2.6" fill="#78350f"/><path d="M95 20 L95 25" stroke="#166534" stroke-width="1.8"/><path d="M95 22 L90 20 M95 22 L100 20" stroke="#166534" stroke-width="1.3"/><g fill="#78716c"><circle cx="30" cy="31" r="2.6"/><circle cx="160" cy="31" r="2.6"/></g><rect x="20" y="29" width="150" height="2.6" fill="#57534e"/><rect x="0" y="34" width="190" height="2" fill="#b45309"/></svg>
+      <div class="numk"><span class="mk" style="background:#65a30d">15</span><span class="kicker">Art &middot; Netherlands</span></div>
+      <h3>Van Gogh Blockbuster Opens in Amsterdam</h3>
+      <p>A Van Gogh show of 60 works opens at the Van Gogh Museum, tickets selling out in hours.</p>
+      <div class="tag"><span class="c">&#10003; CONFIRMED</span> <span class="s">Van Gogh Museum</span></div>
+    </div>
+  </div>
+
+  <div class="goodnews"><span class="label">GOOD NEWS TODAY</span><span class="items"><b>16</b> Kenya plants its millionth tree in a national reforestation drive &nbsp;&middot;&nbsp; <b>17</b> Child literacy rises in three regions &nbsp;&middot;&nbsp; <b>18</b> Clean water reaches 2 million more in Bangladesh</span></div>
+
+  <div class="weather">
+    <span class="wlabel">WEATHER &mdash; SAT 21 NOV</span>
+    <div class="cities">
+      <span class="city"><svg viewBox="0 0 14 14"><g fill="#94a3b8"><circle cx="5" cy="9" r="3"/><circle cx="9" cy="8" r="3.5"/><circle cx="7" cy="6" r="2.5"/></g><rect x="2" y="9" width="10" height="2.5" rx="1" fill="#94a3b8"/></svg><span><b>London</b> 7&deg; Cloudy</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="3.2" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="1.2"><line x1="7" y1="1" x2="7" y2="2.4"/><line x1="7" y1="11.6" x2="7" y2="13"/><line x1="1" y1="7" x2="2.4" y2="7"/><line x1="11.6" y1="7" x2="13" y2="7"/><line x1="2.9" y1="2.9" x2="3.9" y2="3.9"/><line x1="10.1" y1="10.1" x2="11.1" y2="11.1"/><line x1="11.1" y1="2.9" x2="10.1" y2="3.9"/><line x1="3.9" y1="10.1" x2="2.9" y2="11.1"/></g></svg><span><b>New York</b> 9&deg; Sunny</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><g fill="#64748b"><circle cx="5" cy="6" r="2.5"/><circle cx="9" cy="5" r="3"/><circle cx="7" cy="4" r="2"/></g><g stroke="#3b82f6" stroke-width="1.2"><line x1="4" y1="10" x2="3.5" y2="12.5"/><line x1="7" y1="10" x2="6.5" y2="12.5"/><line x1="10" y1="10" x2="9.5" y2="12.5"/></g></svg><span><b>Paris</b> 8&deg; Rain</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="3.2" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="1.2"><line x1="7" y1="1" x2="7" y2="2.4"/><line x1="7" y1="11.6" x2="7" y2="13"/><line x1="1" y1="7" x2="2.4" y2="7"/><line x1="11.6" y1="7" x2="13" y2="7"/></g></svg><span><b>Dubai</b> 27&deg; Sunny</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="3.2" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="1.2"><line x1="7" y1="1" x2="7" y2="2.4"/><line x1="7" y1="11.6" x2="7" y2="13"/><line x1="1" y1="7" x2="2.4" y2="7"/><line x1="11.6" y1="7" x2="13" y2="7"/></g></svg><span><b>Tokyo</b> 14&deg; Clear</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><g fill="#64748b"><circle cx="5" cy="6" r="2.5"/><circle cx="9" cy="5" r="3"/><circle cx="7" cy="4" r="2"/></g><g stroke="#3b82f6" stroke-width="1.2"><line x1="4" y1="10" x2="3.5" y2="12.5"/><line x1="7" y1="10" x2="6.5" y2="12.5"/><line x1="10" y1="10" x2="9.5" y2="12.5"/></g></svg><span><b>Jakarta</b> 31&deg; Rain</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="3.2" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="1.2"><line x1="7" y1="1" x2="7" y2="2.4"/><line x1="7" y1="11.6" x2="7" y2="13"/><line x1="1" y1="7" x2="2.4" y2="7"/><line x1="11.6" y1="7" x2="13" y2="7"/><line x1="2.9" y1="2.9" x2="3.9" y2="3.9"/><line x1="10.1" y1="10.1" x2="11.1" y2="11.1"/><line x1="11.1" y1="2.9" x2="10.1" y2="3.9"/><line x1="3.9" y1="10.1" x2="2.9" y2="11.1"/></g></svg><span><b>Sydney</b> 24&deg; Sunny</span></span>
+      <span class="city"><svg viewBox="0 0 14 14"><g fill="#94a3b8"><circle cx="5" cy="9" r="3"/><circle cx="9" cy="8" r="3.5"/><circle cx="7" cy="6" r="2.5"/></g><rect x="2" y="9" width="10" height="2.5" rx="1" fill="#94a3b8"/></svg><span><b>S&atilde;o Paulo</b> 25&deg; Cloudy</span></span>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="leftcol">
+      <div class="mapbox">
+        <h3>WHERE IT HAPPENED</h3>
+        <svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="mapOcean" cx="0.5" cy="0.42" r="0.78">
+              <stop offset="0" stop-color="#182c55"/>
+              <stop offset="1" stop-color="#0a142e"/>
+            </radialGradient>
+            <filter id="landTex" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="11" result="n1"/>
+              <feColorMatrix in="n1" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.7 0.7 0.7 0 -1.0" result="darkA"/>
+              <feComposite in="darkA" in2="SourceAlpha" operator="in" result="darkM"/>
+              <feBlend in="SourceGraphic" in2="darkM" mode="multiply" result="darkened"/>
+              <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="29" result="n2"/>
+              <feColorMatrix in="n2" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.6 0.6 0.6 0 -1.1" result="lightA"/>
+              <feComposite in="lightA" in2="SourceAlpha" operator="in" result="lightM"/>
+              <feBlend in="darkened" in2="lightM" mode="screen"/>
+            </filter>
+          </defs>
+          <rect width="300" height="150" fill="url(#mapOcean)"/>
+          <g stroke="#2e4a7a" stroke-width="0.5" opacity="0.55"><line x1="25" y1="0" x2="25" y2="150"/><line x1="50" y1="0" x2="50" y2="150"/><line x1="75" y1="0" x2="75" y2="150"/><line x1="100" y1="0" x2="100" y2="150"/><line x1="125" y1="0" x2="125" y2="150"/><line x1="150" y1="0" x2="150" y2="150"/><line x1="175" y1="0" x2="175" y2="150"/><line x1="200" y1="0" x2="200" y2="150"/><line x1="225" y1="0" x2="225" y2="150"/><line x1="250" y1="0" x2="250" y2="150"/><line x1="275" y1="0" x2="275" y2="150"/><line x1="0" y1="18" x2="300" y2="18"/><line x1="0" y1="55" x2="300" y2="55"/><line x1="0" y1="128" x2="300" y2="128"/></g>
+          <g stroke="#3d6a9e" stroke-width="0.6" stroke-dasharray="5 4" fill="none" opacity="0.6"><line x1="0" y1="62" x2="300" y2="62"/><line x1="0" y1="118" x2="300" y2="118"/></g>
+          <line x1="0" y1="90" x2="300" y2="90" stroke="#5b8fd6" stroke-width="1.2" opacity="0.85"/>
+          <g font-family="Arial" font-size="7" fill="#8ea3c2" text-anchor="middle"><text x="25" y="8">150&deg;W</text><text x="50" y="8">120&deg;W</text><text x="75" y="8">90&deg;W</text><text x="100" y="8">60&deg;W</text><text x="125" y="8">30&deg;W</text><text x="150" y="8">0&deg;</text><text x="175" y="8">30&deg;E</text><text x="200" y="8">60&deg;E</text><text x="225" y="8">90&deg;E</text><text x="250" y="8">120&deg;E</text><text x="275" y="8">150&deg;E</text></g>
+          <g font-family="Arial" font-size="7" fill="#8ea3c2"><text x="3" y="14">60&deg;N</text><text x="3" y="51">30&deg;N</text><text x="3" y="87">0&deg;</text><text x="3" y="125">30&deg;S</text></g>
+          <g font-family="Arial" font-size="7" fill="#7ea8dd" text-anchor="end"><text x="297" y="87">EQUATOR</text></g>
+          <g fill="#b99b68" stroke="#8a6d43" stroke-width="0.7" filter="url(#landTex)">
+            <path d="M10.0,10.8 12.5,18.0 18.3,20.4 23.3,18.0 29.2,18.0 33.3,18.0 37.5,20.4 41.7,25.2 45.8,31.2 46.7,39.6 50.0,49.2 52.5,50.4 55.0,55.2 57.5,60.0 59.2,62.4 60.0,60.0 61.7,63.6 62.5,66.0 69.2,70.8 71.7,69.6 75.0,73.2 78.3,75.6 80.8,79.2 84.2,79.2 82.5,74.4 80.0,70.8 77.5,64.8 75.0,64.8 74.2,67.2 70.0,67.2 69.2,58.8 72.5,54.0 75.8,54.0 80.0,54.0 82.5,60.0 83.3,57.6 82.5,51.6 86.7,48.0 88.3,42.0 91.7,39.6 93.3,36.0 95.8,37.2 100.0,33.6 104.2,33.6 100.0,30.0 95.8,30.0 93.3,24.0 90.0,20.4 85.0,15.6 79.2,10.8 75.0,7.2 70.8,7.2 58.3,8.4 45.8,6.0 33.3,6.0 20.8,4.8 12.5,8.4 Z"/>
+            <path d="M101.7,13.2 106.7,18.0 112.5,18.0 116.7,12.0 123.3,8.4 131.7,6.0 129.2,1.2 120.8,-1.2 108.3,-1.2 100.0,1.2 93.3,6.0 98.3,10.8 Z"/>
+            <path d="M85.8,81.6 90.0,75.6 96.7,78.0 100.0,80.4 106.7,84.0 108.3,90.0 113.3,93.6 120.8,99.6 118.3,108.0 116.7,116.4 110.0,123.6 105.8,129.6 101.7,135.6 98.3,139.2 95.8,144.0 93.3,150.0 93.3,154.8 91.7,156.0 89.2,150.0 89.2,138.0 90.8,126.0 91.7,114.0 85.8,104.4 83.3,96.0 82.5,90.0 Z"/>
+            <path d="M142.5,45.6 142.5,38.4 148.3,37.2 149.2,34.8 146.7,32.4 148.3,31.2 151.7,28.8 154.2,26.4 156.7,21.6 158.3,19.2 154.2,18.0 154.2,15.6 158.3,13.2 161.7,9.6 165.0,7.2 170.8,4.8 175.0,6.0 176.7,8.4 179.2,12.0 183.3,8.4 186.7,8.4 190.0,10.8 191.7,18.0 187.5,24.0 183.3,27.6 179.2,30.0 176.7,33.6 175.0,34.8 173.3,36.0 175.0,37.2 173.3,37.2 170.0,38.4 169.2,42.0 166.7,42.0 169.2,44.4 171.7,44.4 173.3,46.8 175.0,46.8 177.5,46.8 180.0,46.8 178.3,45.6 175.0,45.6 172.5,45.6 169.2,46.8 166.7,44.4 165.8,39.6 162.5,37.2 160.0,37.2 162.5,39.6 165.0,42.0 163.3,44.4 161.7,42.0 159.2,39.6 156.7,37.2 155.0,38.4 152.5,39.6 150.0,42.0 148.3,45.6 145.0,46.8 Z"/>
+            <path d="M145.8,30.0 147.5,26.4 145.8,22.8 147.5,20.4 149.2,21.6 150.0,26.4 150.8,28.8 147.5,30.0 Z"/>
+            <path d="M141.7,27.6 143.3,24.0 145.0,24.0 145.0,27.6 143.3,28.8 Z"/>
+            <path d="M131.7,13.2 135.0,14.4 138.3,13.2 136.7,10.8 131.7,10.8 130.0,12.0 Z"/>
+            <path d="M145.0,48.0 141.7,52.8 137.5,57.6 135.8,64.8 135.8,72.0 136.7,75.6 139.2,80.4 143.3,84.0 146.7,84.0 151.7,82.8 155.0,85.2 157.5,85.2 160.8,86.4 157.5,90.0 160.0,94.8 160.8,99.6 160.0,104.4 161.7,110.4 160.0,116.4 161.7,123.6 165.0,128.4 166.7,132.0 171.7,130.8 173.3,128.4 176.7,123.6 180.0,118.8 183.3,111.6 183.3,104.4 185.0,99.6 188.3,94.8 192.5,91.2 192.5,87.6 188.3,84.0 185.0,78.0 183.3,75.6 181.7,72.0 180.8,68.4 179.2,66.0 177.5,63.6 175.0,57.6 176.7,52.8 175.0,52.8 170.8,51.6 166.7,51.6 162.5,50.4 159.2,49.2 158.3,45.6 154.2,45.6 150.0,46.8 Z"/>
+            <path d="M186.7,109.2 189.2,108.0 191.7,109.2 190.8,114.0 187.5,120.0 185.8,116.4 Z"/>
+            <path d="M175.0,46.8 177.5,46.8 180.0,46.8 182.5,52.8 185.0,54.0 186.7,55.2 190.0,55.2 191.7,56.4 195.0,57.6 197.5,58.8 200.0,60.0 201.7,60.0 205.0,60.0 205.8,61.2 208.3,62.4 210.0,66.0 210.8,70.8 213.3,78.0 214.2,80.4 216.7,81.6 216.7,78.0 218.3,73.2 220.8,68.4 223.3,64.8 225.8,63.6 227.5,66.0 228.3,69.6 230.0,70.8 231.7,75.6 233.3,80.4 234.2,84.0 235.8,87.6 236.7,88.8 237.5,86.4 239.2,78.0 240.8,73.2 238.3,66.0 240.0,68.4 241.7,66.0 245.0,63.6 248.3,60.0 250.0,56.4 251.7,52.8 250.0,48.0 251.7,45.6 253.3,42.0 255.8,42.0 258.3,39.6 260.0,38.4 262.5,37.2 265.0,34.8 267.5,30.0 268.3,26.4 267.5,22.8 268.3,19.2 280.0,19.2 283.3,18.0 285.0,20.4 291.7,18.0 298.3,12.0 298.3,8.4 291.7,6.0 283.3,6.0 275.0,3.6 266.7,3.6 258.3,3.6 250.0,2.4 241.7,1.2 233.3,-1.2 225.0,0.0 216.7,2.4 208.3,3.6 200.0,7.2 191.7,8.4 186.7,8.4 190.0,13.2 191.7,18.0 190.0,24.0 188.3,30.0 186.7,33.6 183.3,34.8 180.8,37.2 178.3,39.6 176.7,40.8 175.0,40.8 173.3,40.8 175.0,44.4 Z"/>
+            <path d="M258.3,52.8 260.8,49.2 263.3,48.0 265.8,48.0 267.5,44.4 267.5,40.8 266.7,43.2 264.2,45.6 261.7,48.0 259.2,50.4 Z"/>
+            <path d="M266.7,39.6 268.3,37.2 270.8,37.2 269.2,39.6 Z"/>
+            <path d="M229.2,84.0 233.3,90.0 236.7,94.8 238.3,97.2 235.0,94.8 231.7,87.6 Z"/>
+            <path d="M237.5,97.2 241.7,98.4 245.0,99.6 245.0,100.8 240.0,99.6 237.5,98.4 Z"/>
+            <path d="M240.8,88.8 244.2,85.2 247.5,82.8 249.2,88.8 247.5,93.6 243.3,93.6 240.8,90.0 Z"/>
+            <path d="M249.2,90.0 250.8,88.8 252.5,90.0 250.0,93.6 249.2,92.4 Z"/>
+            <path d="M259.2,91.2 263.3,92.4 267.5,93.6 271.7,97.2 275.0,99.6 272.5,100.8 267.5,99.6 263.3,97.2 259.2,93.6 Z"/>
+            <path d="M245.0,116.4 245.0,126.0 245.8,129.6 248.3,132.0 253.3,129.6 257.5,128.4 260.0,128.4 262.5,132.0 265.0,132.0 266.7,135.6 270.8,135.6 275.0,134.4 277.5,128.4 277.5,122.4 275.0,117.6 271.7,112.8 268.3,108.0 268.3,103.2 264.2,104.4 262.5,108.0 260.0,104.4 258.3,105.6 255.0,106.8 251.7,110.4 248.3,114.0 Z"/>
+            <path d="M270.8,139.2 273.3,140.4 273.3,141.6 271.7,141.6 Z"/>
+            <path d="M289.2,144.0 292.5,140.4 295.0,136.8 297.5,135.6 295.8,135.6 294.2,138.0 291.7,141.6 289.2,144.0 288.3,145.2 290.8,141.6 293.3,139.2 295.0,140.4 293.3,144.0 290.0,146.4 Z"/>
+          </g>
+          <g font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle">
+            <circle cx="72" cy="42" r="6" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="72" y="45" fill="#fff">1</text>
+            <circle cx="158" cy="34" r="6" fill="#1d4ed8" stroke="#fff" stroke-width="1"/><text x="158" y="37" fill="#fff">2</text>
+            <circle cx="80" cy="30" r="6" fill="#ca8a04" stroke="#fff" stroke-width="1"/><text x="80" y="33" fill="#fff">3</text>
+            <circle cx="48" cy="28" r="6" fill="#ca8a04" stroke="#fff" stroke-width="1"/><text x="48" y="31" fill="#fff">4</text>
+            <circle cx="86" cy="98" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="86" y="101" fill="#fff">5</text>
+            <circle cx="140" cy="26" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="140" y="29" fill="#fff">6</text>
+            <circle cx="152" cy="72" r="6" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="152" y="75" fill="#fff">7</text>
+            <circle cx="222" cy="82" r="6" fill="#ca8a04" stroke="#fff" stroke-width="1"/><text x="222" y="85" fill="#fff">8</text>
+            <circle cx="146" cy="16" r="6" fill="#ca8a04" stroke="#fff" stroke-width="1"/><text x="146" y="19" fill="#fff">9</text>
+            <circle cx="290" cy="104" r="6" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="290" y="107" fill="#fff">10</text>
+            <circle cx="130" cy="20" r="6" fill="#dc2626" stroke="#fff" stroke-width="1"/><text x="130" y="23" fill="#fff">13</text>
+            <circle cx="178" cy="58" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="178" y="61" fill="#fff">21</text>
+            <circle cx="168" cy="78" r="6" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="168" y="81" fill="#fff">25</text>
+            <circle cx="252" cy="30" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="252" y="33" fill="#fff">38</text>
+            <circle cx="240" cy="92" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="240" y="95" fill="#fff">43</text>
+            <circle cx="272" cy="112" r="6" fill="#65a30d" stroke="#fff" stroke-width="1"/><text x="272" y="115" fill="#fff">51</text>
+          </g>
+          <g font-family="Arial" font-size="7" fill="#c7d3e8"><text x="30" y="146">N. AMERICA</text><text x="118" y="146">AFRICA</text><text x="225" y="146">ASIA</text><text x="268" y="146">OCEANIA</text></g>
+        </svg>
+        <div class="maplegend"><b>27 &middot; First teacher in orbit &mdash; off the map.</b><br><span class="dot" style="background:#dc2626"></span>war &amp; security<span class="dot" style="background:#1d4ed8"></span>politics &amp; diplomacy<span class="dot" style="background:#ca8a04"></span>economy &amp; business<span class="dot" style="background:#16a34a"></span>health &amp; weather<span class="dot" style="background:#65a30d"></span>science &amp; culture<span class="dot" style="background:#7c3aed"></span>courts &amp; world</div>
+      </div>
+      <div class="datecheck">
+        <h3>DATE CHECK &middot; LEFT OUT AS OLDER NEWS</h3>
+        <div class="cols">
+          <div class="item">COP31 opens in Antalya <b>&mdash; Mon 9 Nov</b></div>
+          <div class="item">COP31&rsquo;s second draft text <b>&mdash; Fri 20 Nov</b></div>
+          <div class="item">Diwali ends <b>&mdash; Sun 8 Nov</b></div>
+          <div class="item">Remembrance Sunday in the UK <b>&mdash; Sun 8 Nov</b></div>
+          <div class="item">Melbourne Cup <b>&mdash; Tue 3 Nov</b></div>
+          <div class="item">US jobs report <b>&mdash; Fri 6 Nov</b></div>
+        </div>
+        <div class="notyet">Not yet: COP31 final text, expected Sun 22 Nov; EU summit on Ukraine aid opens Mon 23 Nov.</div>
+      </div>
+    </div>
+    <div class="bcol">
+      <h3>THE AMERICAS &middot; AFRICA &middot; MIDDLE EAST &middot; SPACE</h3>
+      <div class="brief"><span class="fl fl-us"></span><span class="mk" style="background:#65a30d">24</span><b>CALIFORNIA</b> &mdash; Quantum computer breaks speed barrier</div>
+      <div class="brief"><span class="fl fl-us"></span><span class="mk" style="background:#ca8a04">32</span><b>TEXAS&ndash;MEXICO</b> &mdash; Driverless trucks cross border</div>
+      <div class="brief"><span class="fl fl-br"></span><span class="mk" style="background:#16a34a">35</span><b>BRAZIL</b> &mdash; Amazon deforestation at 12-year low</div>
+      <div class="brief"><span class="fl fl-us"></span><span class="mk" style="background:#ca8a04">41</span><b>CHICAGO</b> &mdash; Wheat jumps 4% on Black Sea jitters</div>
+      <div class="brief"><span class="fl fl-mx"></span><span class="mk" style="background:#dc2626">42</span><b>MEXICO</b> &mdash; 23 cartel suspects arrested in raids</div>
+      <div class="brief"><span class="fl fl-jo"></span><span class="mk" style="background:#65a30d">21</span><b>JORDAN</b> &mdash; 3,000-year-old city unearthed</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#16a34a">25</span><b>HORN OF AFRICA</b> &mdash; Drought aid reaches 400,000</div>
+      <div class="brief"><span class="fl fl-eg"></span><span class="mk" style="background:#1d4ed8">28</span><b>CAIRO</b> &mdash; Gaza talks resume in good faith</div>
+      <div class="brief"><span class="fl fl-ae"></span><span class="mk" style="background:#ca8a04">36</span><b>GULF</b> &mdash; Cross-border rail link agreed</div>
+      <div class="brief"><span class="fl fl-ng"></span><span class="mk" style="background:#16a34a">37</span><b>NIGERIA</b> &mdash; Solar mini-grids reach villages</div>
+      <div class="brief"><span class="fl fl-ae"></span><span class="mk" style="background:#ca8a04">47</span><b>ABU DHABI</b> &mdash; 2 GW solar park switches on</div>
+      <div class="brief"><span class="fl fl-sa"></span><span class="mk" style="background:#1d4ed8">48</span><b>RIYADH</b> &mdash; Gulf leaders finalise customs union</div>
+      <div class="brief"><span class="fl fl-ng"></span><span class="mk" style="background:#16a34a">49</span><b>NIGERIA</b> &mdash; 5 million malaria nets handed out</div>
+      <div class="brief"><span class="fl fl-ke"></span><span class="mk" style="background:#16a34a">50</span><b>KENYA</b> &mdash; Plastics banned in national parks</div>
+      <div class="brief"><span class="fl fl-aq"></span><span class="mk" style="background:#65a30d">22</span><b>ANTARCTICA</b> &mdash; Research station goes solar</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#65a30d">27</span><b>ORBIT</b> &mdash; First teacher flies to space</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#65a30d">52</span><b>SPACE</b> &mdash; Third interstellar comet confirmed</div>
+    </div>
+    <div class="bcol">
+      <h3>EUROPE &middot; ASIA &middot; OCEANIA &middot; GLOBAL</h3>
+      <div class="brief"><span class="fl fl-de"></span><span class="mk" style="background:#ca8a04">19</span><b>FRANKFURT</b> &mdash; ECB holds rates steady</div>
+      <div class="brief"><span class="fl fl-gb"></span><span class="mk" style="background:#65a30d">23</span><b>LONDON</b> &mdash; Record crowd for women&rsquo;s derby</div>
+      <div class="brief"><span class="fl fl-de"></span><span class="mk" style="background:#7c3aed">30</span><b>BERLIN</b> &mdash; Museum returns 40 Benin Bronzes</div>
+      <div class="brief"><span class="fl fl-gb"></span><span class="mk" style="background:#16a34a">31</span><b>OXFORD</b> &mdash; New antibiotic beats resistant infections</div>
+      <div class="brief"><span class="fl fl-ch"></span><span class="mk" style="background:#1d4ed8">39</span><b>GENEVA</b> &mdash; UN rights council opens final session</div>
+      <div class="brief"><span class="fl fl-gb"></span><span class="mk" style="background:#16a34a">40</span><b>BRITAIN</b> &mdash; Storm brings 90 km/h gusts</div>
+      <div class="brief"><span class="fl fl-id"></span><span class="mk" style="background:#ca8a04">20</span><b>JAKARTA</b> &mdash; New 12-station metro line opens</div>
+      <div class="brief"><span class="fl fl-jp"></span><span class="mk" style="background:#65a30d">38</span><b>JAPAN</b> &mdash; Maglev hits 500 km/h in trials</div>
+      <div class="brief"><span class="fl fl-in"></span><span class="mk" style="background:#16a34a">44</span><b>INDIA</b> &mdash; TB vaccine trials expand to 12 cities</div>
+      <div class="brief"><span class="fl fl-kr"></span><span class="mk" style="background:#ca8a04">45</span><b>SEOUL</b> &mdash; Samsung opens $17bn chip plant</div>
+      <div class="brief"><span class="fl fl-jp"></span><span class="mk" style="background:#65a30d">46</span><b>KYOTO</b> &mdash; Festival honours Miyazaki</div>
+      <div class="brief"><span class="fl fl-nz"></span><span class="mk" style="background:#65a30d">26</span><b>NEW ZEALAND</b> &mdash; Indigenous language gains funding</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#16a34a">33</span><b>PACIFIC</b> &mdash; Coral reefs grow back faster</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#65a30d">43</span><b>PACIFIC</b> &mdash; NASA names Artemis II splashdown zone</div>
+      <div class="brief"><span class="fl fl-au"></span><span class="mk" style="background:#65a30d">51</span><b>BRISBANE</b> &mdash; Australia win Ashes opener</div>
+      <div class="brief"><span class="fl fl-gl"></span><span class="mk" style="background:#ca8a04">29</span><b>GLOBAL</b> &mdash; Battery prices fall to new low</div>
+      <div class="brief"><span class="fl fl-un"></span><span class="mk" style="background:#1d4ed8">34</span><b>YOUTH SUMMIT</b> &mdash; Delegates demand binding targets</div>
+    </div>
+  </div>
+
+  <div class="footer">Every story here happened, or was first reported, on <b>Saturday 21 November 2026</b>; claims are attributed. Sources: AP &middot; Reuters &middot; AFP &middot; Guardian &middot; BBC &middot; WHO &middot; NASA &middot; Nature &middot; Lancet &middot; NHK &middot; Interpol &mdash; Original illustrations</div>
+</div>
+</body>
+</html>
